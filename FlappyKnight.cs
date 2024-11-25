@@ -15,12 +15,12 @@ namespace FlappyKnight {
         public override string GetVersion() => "1.0.0.0";
 
         public static FlappyKnight instance;
+        public bool isFlappyMode;
 
         public static GameObject goamLowPrefab;
         public static GameObject goamHighPrefab;
         public static GameObject leverPrefab;
 
-        public bool isFlappyMode;
 
         public override void Initialize(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects) {
             On.GameManager.OnNextLevelReady += sceneChange;
@@ -34,15 +34,6 @@ namespace FlappyKnight {
             leverPrefab = preloadedObjects["Ruins1_31"]["Lift Call Lever"];
             instance = this;
             ModeMenu.AddMode(new FlappyMenuConstructor());
-
-            //testing
-            ModHooks.HeroUpdateHook += heroUpdate;
-        }
-
-        private void heroUpdate() {
-            if(Input.GetKeyDown(KeyCode.O)) {
-                runGoamSpawning();
-            }
         }
 
         public override List<(string, string)> GetPreloadNames() {
@@ -133,7 +124,6 @@ namespace FlappyKnight {
                 GameManager.instance.ClearSaveFile(GameManager.instance.profileID, delegate (bool didClear) {});
                 saveMode = GameManager.ReturnToMainMenuSaveModes.DontSave;
             }
-            isFlappyMode = false;
             return orig(self, saveMode, callback);
         }
 

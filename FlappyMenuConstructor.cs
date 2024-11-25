@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MenuChanger;
-using MenuChanger.Extensions;
+﻿using MenuChanger;
 using MenuChanger.MenuElements;
-using MenuChanger.MenuPanels;
 
 namespace FlappyKnight {
     internal class FlappyMenuConstructor: ModeMenuConstructor {
 
         public override void OnEnterMainMenu(MenuPage modeMenu) {
+            FlappyKnight.instance.isFlappyMode = false;
         }
 
         public override void OnExitMainMenu() {
@@ -29,16 +23,6 @@ namespace FlappyKnight {
 
             UIManager.instance.ContinueGame();
             GameManager.instance.ContinueGame();
-
-            //UIManager.instance.StartNewGame();
-            
-            /*if(newGame) {
-                UIManager.instance.StartNewGame();
-            }
-            else {
-                UIManager.instance.ContinueGame();
-                GameManager.instance.ContinueGame();
-            }*/
         }
     }
 }
