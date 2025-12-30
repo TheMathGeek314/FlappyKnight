@@ -12,7 +12,7 @@ using Satchel;
 namespace FlappyKnight {
     public class FlappyKnight: Mod {
         new public string GetName() => "FlappyKnight";
-        public override string GetVersion() => "1.0.0.0";
+        public override string GetVersion() => "1.0.0.1";
 
         public static FlappyKnight instance;
         public bool isFlappyMode;
@@ -155,8 +155,14 @@ namespace FlappyKnight {
             GameObject knight = HeroController.instance.gameObject;
             Rigidbody2D rb = knight.GetComponent<Rigidbody2D>();
             float lastSpawnTime = 0;
-            foreach(string name in new string[] { "Chunk 0 0", "Chunk 0 0(Clone)", "top1", "Lift Call Lever(Clone)(Clone)" }) {
+            foreach(string name in new string[] { "Chunk 0 0", "Chunk 0 0(Clone)", "top1" }) {
                 GameObject.Find(name).SetActive(false);
+            }
+            try {
+                GameObject.Find("Lift Call Lever(Clone)(Clone)").SetActive(false);
+            }
+            catch(Exception) {
+                GameObject.Find("Lift Call Lever(Clone)").SetActive(false);
             }
             knight.transform.SetPositionX(knightX);
             knight.transform.SetPositionY(16);
